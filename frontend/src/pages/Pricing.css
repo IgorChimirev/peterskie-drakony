@@ -1,0 +1,36 @@
+.tariff-card {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tariff-card--highlighted {
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(122, 31, 43, 0.1);
+}
+
+.tariff-card__desc {
+  color: var(--ink-muted);
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.tariff-card__price {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 6px 0 14px;
+}
+
+.tariff-card__old {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink-muted);
+  text-decoration: line-through;
+}
