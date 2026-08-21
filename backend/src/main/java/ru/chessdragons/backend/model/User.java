@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -30,7 +32,22 @@ public class User {
     private String passwordHash;
 
     private String fullName;
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private AccountType accountType = AccountType.PARENT;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private UserStatus status = UserStatus.ACTIVE;
+
+    @Builder.Default
+    private boolean emailVerified = false;
+
+    @Builder.Default
+    private boolean phoneVerified = false;
 }

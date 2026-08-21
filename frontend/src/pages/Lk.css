@@ -99,3 +99,160 @@
     grid-template-columns: 1fr;
   }
 }
+
+.lk-profile {
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+
+.lk-profile__view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lk-profile__form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.lk-profile__form input {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+}
+
+.lk-profile__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.lk-student__head {
+  flex-wrap: wrap;
+}
+
+.lk-student__head-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.lk-student__head-actions button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.lk-student__head-actions button.danger {
+  color: #A33;
+}
+
+.lk-student__edit {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.lk-student__edit input,
+.lk-student__edit select {
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+}
+
+.lk-student__enroll {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-muted);
+  margin: 10px 0;
+}
+
+.lk-student__enroll select {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.lk-student__history {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.lk-student__history h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lk-student__history ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lk-student__history li span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .lk-student__history {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lk-materials {
+  padding: 20px 22px;
+  margin: 24px 0;
+}
+
+.lk-materials ul {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lk-materials li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+}
+
+.lk-materials li p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--ink-muted);
+}

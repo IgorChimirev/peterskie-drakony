@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { api, getToken, setToken } from "../api/client";
-import type { AuthUser } from "../api/types";
+import type { AuthUser, Role } from "../api/types";
 
 const USER_KEY = "cd_user";
 
@@ -8,8 +8,9 @@ interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<AuthUser>;
-  register: (fullName: string, email: string, password: string) => Promise<AuthUser>;
+  register: (fullName: string, email: string, password: string, phone: string, accountType: string) => Promise<AuthUser>;
   logout: () => void;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -27,7 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLoading(false);
   }, []);
 
-  function persist(fullName: string, role: "PARENT" | "ADMIN", token: string): AuthUser {
+  function persist(fullName: string, role: Role, token: string): AuthUser {
     const authUser: AuthUser = { fullName, role };
     setToken(token);
     localStorage.setItem(USER_KEY, JSON.stringify(authUser));
@@ -40,8 +41,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return persist(res.fullName, res.role, res.token);
   }
 
-  async function register(fullName: string, email: string, password: string) {
-    const res = await api.auth.register(fullName, email, password);
+  async function register(fullName: string, email: string, password: string, phone: string, accountType: string) {
+    const res = await api.auth.register(fullName, email, password, phone, accountType);
     return persist(res.fullName, res.role, res.token);
   }
 
@@ -51,8 +52,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   }
 
+  async function refreshUser() {
+    const me = await api.auth.me();
+    if (user) {
+      const updated = { ...user, fullName: me.fullName };
+      localStorage.setItem(USER_KEY, JSON.stringify(updated));
+      setUser(updated);
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -15,6 +15,9 @@ public class AuthDtos {
         private String email;
         @NotBlank
         private String password;
+        private String phone;
+        /** ADULT — регистрируется как самостоятельный участник, PARENT — как родитель, будет добавлять детей. */
+        private String accountType;
     }
 
     @Data
@@ -30,5 +33,6 @@ public class AuthDtos {
         private final String token;
         private final String fullName;
         private final String role;
+        private final boolean emailVerified;
     }
 }

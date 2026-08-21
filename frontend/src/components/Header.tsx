@@ -11,8 +11,18 @@ const NAV = [
   { to: "/schedule", label: "Расписание" },
   { to: "/pricing", label: "Цены" },
   { to: "/news", label: "Новости" },
+  { to: "/events", label: "События" },
+  { to: "/gallery", label: "Галерея" },
+  { to: "/rating", label: "Рейтинг" },
+  { to: "/reviews", label: "Отзывы" },
   { to: "/contacts", label: "Контакты" },
 ];
+
+function cabinetPath(role?: string) {
+  if (role === "ADMIN") return "/admin";
+  if (role === "TRAINER") return "/trainer";
+  return "/lk";
+}
 
 export function Header() {
   const { user, logout } = useAuth();
@@ -42,17 +52,12 @@ export function Header() {
               {item.label}
             </NavLink>
           ))}
-          {user?.role === "ADMIN" && (
-            <NavLink to="/admin" className={({ isActive }) => (isActive ? "site-header__link is-active" : "site-header__link")}>
-              Админка
-            </NavLink>
-          )}
         </nav>
 
         <div className="site-header__actions">
           {user ? (
             <>
-              <NavLink to="/lk" className="btn btn-ghost">
+              <NavLink to={cabinetPath(user.role)} className="btn btn-ghost">
                 {user.fullName.split(" ")[0]}
               </NavLink>
               <button

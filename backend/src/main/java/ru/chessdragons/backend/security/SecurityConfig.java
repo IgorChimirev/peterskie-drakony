@@ -71,12 +71,17 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/api/auth/verify/**").authenticated()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET,
                                 "/api/branches/**", "/api/trainers/**", "/api/tariffs/**",
-                                "/api/schedule/**", "/api/news/**", "/api/reviews/**").permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/leads").permitAll()
+                                "/api/schedule/**", "/api/news/**", "/api/reviews/**",
+                                "/api/events/**", "/api/gallery/**", "/api/rating/**").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.POST,
+                                "/api/leads", "/api/reviews").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/trainer/**").hasRole("TRAINER")
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))

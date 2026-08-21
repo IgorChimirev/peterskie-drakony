@@ -16,7 +16,8 @@ export function Login() {
     setError(null);
     try {
       const authUser = await login(email, password);
-      navigate(authUser.role === "ADMIN" ? "/admin" : "/lk");
+      const destination = authUser.role === "ADMIN" ? "/admin" : authUser.role === "TRAINER" ? "/trainer" : "/lk";
+      navigate(destination);
     } catch {
       setError("Неверный email или пароль");
     } finally {
@@ -48,7 +49,8 @@ export function Login() {
             Нет аккаунта? <Link to="/register" style={{ color: "var(--accent)", fontWeight: 700 }}>Зарегистрироваться</Link>
           </p>
           <p style={{ fontSize: 12, color: "var(--ink-muted)", margin: 0 }}>
-            Демо-доступ уже подставлен: родитель — parent@example.com / parent123. Для админки — arina@chessdragons.ru / admin123.
+            Демо-доступ: родитель — parent@example.com / parent123, тренер — lovkov@chessdragons.ru / trainer123,
+            админка — arina@chessdragons.ru / admin123.
           </p>
         </form>
       </div>

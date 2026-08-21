@@ -13,6 +13,11 @@ import { Trial } from "./pages/Trial";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Lk } from "./pages/Lk";
+import { Trainer } from "./pages/Trainer";
+import { Events } from "./pages/Events";
+import { Gallery } from "./pages/Gallery";
+import { Rating } from "./pages/Rating";
+import { Reviews } from "./pages/Reviews";
 import { Admin } from "./pages/admin/Admin";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
 
@@ -29,6 +34,10 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/news" element={<News />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/trial" element={<Trial />} />
           <Route path="/login" element={<Login />} />
@@ -38,6 +47,14 @@ function App() {
             element={
               <ProtectedRoute requireRole="PARENT">
                 <Lk />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trainer"
+            element={
+              <ProtectedRoute requireRole="TRAINER">
+                <Trainer />
               </ProtectedRoute>
             }
           />

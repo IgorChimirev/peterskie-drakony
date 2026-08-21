@@ -1,0 +1,49 @@
+.notifications-list {
+  padding: 20px;
+}
+
+.notifications-list ul {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.notifications-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  font-size: 13.5px;
+}
+
+.notifications-list li.is-unread {
+  border-left: 3px solid var(--accent);
+}
+
+.notifications-list li p {
+  margin: 2px 0;
+  color: var(--ink-muted);
+}
+
+.notifications-list li span {
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+.notifications-list li button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}

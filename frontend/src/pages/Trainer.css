@@ -1,0 +1,29 @@
+.trainer-form {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trainer-form input,
+.trainer-form select {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+}
+
+.trainer-form__points {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+.trainer-form__points input {
+  width: 90px;
+}

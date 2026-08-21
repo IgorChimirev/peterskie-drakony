@@ -1,0 +1,36 @@
+.verify-banner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--ember, #C4622D);
+  background: var(--ember-soft, #F5E6DA);
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  margin-bottom: 14px;
+}
+
+.verify-banner__form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.verify-banner__debug {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.verify-banner__form input {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  width: 120px;
+}
+
+.verify-banner__error {
+  color: var(--accent);
+  font-size: 12.5px;
+}

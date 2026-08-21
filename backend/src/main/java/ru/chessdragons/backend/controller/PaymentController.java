@@ -23,6 +23,7 @@ import ru.chessdragons.backend.repository.StudentRepository;
 import ru.chessdragons.backend.repository.SubscriptionRepository;
 import ru.chessdragons.backend.repository.TariffRepository;
 import ru.chessdragons.backend.repository.UserRepository;
+import ru.chessdragons.backend.service.NotificationService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,6 +38,7 @@ public class PaymentController {
     private final SubscriptionRepository subscriptionRepository;
     private final PaymentRepository paymentRepository;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
 
     // Заглушка платёжного шлюза: реального эквайринга (ЮKassa/Тинькофф/CloudPayments) нет,
     // оплата считается успешной сразу — это временная реализация, чтобы показать сквозной сценарий.
@@ -60,6 +62,10 @@ public class PaymentController {
 
         Payment payment = new Payment(null, subscription, tariff.getPrice(), "SUCCESS", "stub", LocalDateTime.now());
         payment = paymentRepository.save(payment);
+
+        notificationService.notify(currentUser, "Оплата прошла успешно",
+                "Абонемент «" + tariff.getName() + "» для " + student.getFullName() + " оплачен на сумму "
+                        + tariff.getPrice() + " ₽.");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new CheckoutResponse(payment, subscription));
     }

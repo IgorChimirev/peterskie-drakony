@@ -14,6 +14,14 @@ export interface Trainer {
   headCoach: boolean;
   achievements: string;
   sortOrder: number;
+  photoUrl: string | null;
+  user: AuthUserRef | null;
+}
+
+export interface AuthUserRef {
+  id: number;
+  email: string;
+  fullName: string;
 }
 
 export interface Tariff {
@@ -45,6 +53,7 @@ export interface NewsPost {
   excerpt: string;
   body: string;
   publishedAt: string;
+  coverImageUrl: string | null;
 }
 
 export interface Review {
@@ -52,6 +61,8 @@ export interface Review {
   authorName: string;
   rating: number;
   text: string;
+  approved: boolean;
+  createdAt: string;
 }
 
 export interface LeadPayload {
@@ -68,7 +79,9 @@ export interface Lead extends LeadPayload {
   status: string;
 }
 
-export type Role = "PARENT" | "ADMIN";
+export type Role = "PARENT" | "TRAINER" | "ADMIN";
+export type AccountType = "ADULT" | "PARENT";
+export type UserStatus = "ACTIVE" | "BLOCKED";
 
 export interface AuthUser {
   fullName: string;
@@ -79,6 +92,19 @@ export interface AuthResponse {
   token: string;
   fullName: string;
   role: Role;
+  emailVerified: boolean;
+}
+
+export interface Me {
+  id: number;
+  email: string;
+  fullName: string;
+  phone: string | null;
+  role: Role;
+  accountType: AccountType;
+  status: UserStatus;
+  emailVerified: boolean;
+  phoneVerified: boolean;
 }
 
 export interface Subscription {
@@ -90,12 +116,32 @@ export interface Subscription {
   status: "ACTIVE" | "EXPIRED";
 }
 
+export interface Homework {
+  id: number;
+  description: string;
+  points: number;
+  date: string;
+  trainer: Trainer;
+}
+
+export interface TournamentResult {
+  id: number;
+  tournamentName: string;
+  date: string;
+  place: string;
+  points: number;
+}
+
 export interface StudentView {
   id: number;
   fullName: string;
   age: string;
   branch: Branch | null;
+  scheduleSlot: ScheduleSlot | null;
   subscriptions: Subscription[];
+  homework: Homework[];
+  tournamentResults: TournamentResult[];
+  ratingPoints: number;
 }
 
 export interface CreateStudentPayload {
@@ -126,4 +172,100 @@ export interface ScheduleSlotPayload {
   booked: number;
   branchId: number;
   trainerId: number;
+}
+
+export interface RatingEntry {
+  studentId: number;
+  studentName: string;
+  homeworkPoints: number;
+  tournamentPoints: number;
+  totalPoints: number;
+}
+
+export interface ChatMessage {
+  id: number;
+  threadOwner: AuthUserRef;
+  sender: AuthUserRef;
+  text: string;
+  createdAt: string;
+  readByParent: boolean;
+  readByStaff: boolean;
+}
+
+export interface Notification {
+  id: number;
+  title: string;
+  body: string;
+  read: boolean;
+  createdAt: string;
+}
+
+export interface EventItem {
+  id: number;
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+  coverImageUrl: string | null;
+}
+
+export interface GalleryItem {
+  id: number;
+  title: string;
+  imageUrl: string | null;
+  eventDate: string;
+}
+
+export interface LearningMaterial {
+  id: number;
+  title: string;
+  description: string;
+  fileUrl: string | null;
+  category: string;
+}
+
+export interface EmailLog {
+  id: number;
+  toAddress: string;
+  subject: string;
+  body: string;
+  sentAt: string;
+  status: string;
+}
+
+export interface IntegrationStatus {
+  key: string;
+  name: string;
+  status: "NOT_CONNECTED" | "STUBBED" | "CONNECTED";
+  description: string;
+}
+
+export interface DashboardStats {
+  totalUsers: number;
+  totalParents: number;
+  totalTrainers: number;
+  totalStudents: number;
+  leadsByStatus: Record<string, number>;
+  activeSubscriptions: number;
+  totalRevenue: number;
+  pendingReviews: number;
+  topRating: RatingEntry[];
+}
+
+export interface BackupFile {
+  name: string;
+  sizeBytes: number;
+  createdAtEpochMs: number;
+}
+
+export interface AdminUserView {
+  id: number;
+  email: string;
+  fullName: string;
+  phone: string | null;
+  role: Role;
+  accountType: AccountType;
+  status: UserStatus;
+  emailVerified: boolean;
+  phoneVerified: boolean;
 }

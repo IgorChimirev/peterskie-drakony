@@ -28,4 +28,5 @@ public class NewsPost {
     private String body;
 
     private LocalDate publishedAt;
+    private String coverImageUrl;
 }
